@@ -1,7 +1,7 @@
 #include<iostream>
 
 //#define GLEW_STATIC
-
+//Bibliotecas
 #include <GL/glew.h>
 
 #include <GLFW/glfw3.h>
@@ -111,7 +111,7 @@ int main() {
 	
 
 
-
+	//se pintan los pixeles constantemente
 	while (!glfwWindowShouldClose(window))
 	{
 		// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
