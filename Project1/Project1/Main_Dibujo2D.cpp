@@ -66,7 +66,7 @@ int main() {
 		-0.5f,  0.5f, 0.0f,   1.0f,1.0f,0.0f, // top left 
 	};
 	unsigned int indices[] = {  // note that we start from 0!
-		3,2,1,// second Triangle
+		3,2,1,// second Triangle //3,2,0 para dibujar el triangulo invertido
 		0,1,3,
 	};
 
@@ -131,7 +131,7 @@ int main() {
         
 		
         //glDrawArrays(GL_TRIANGLES,0,3);
-        glDrawElements(GL_TRIANGLES, 3,GL_UNSIGNED_INT,0);
+        glDrawElements(GL_TRIANGLES, 3,GL_UNSIGNED_INT,0); //Este nos sirve para dibujar el triangulo
 
         //glDrawElements(GL_TRIANGLES, 3,GL_UNSIGNED_INT,0);
         //glDrawElements(GL_TRIANGLES, 6,GL_UNSIGNED_INT,0); //cuadrado
