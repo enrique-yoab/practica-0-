@@ -22,7 +22,7 @@
 #include "stb_image.h"
 
 // Properties
-const GLuint WIDTH = 1200, HEIGHT = 800;
+const GLuint WIDTH = 800, HEIGHT = 600;
 int SCREEN_WIDTH, SCREEN_HEIGHT;
 
 // Function prototypes
@@ -131,8 +131,8 @@ int main( )
         dog.Draw(shader);
         
         model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(0.0f, 3.0f, -3.0f));
-        model = glm::scale(model, glm::vec3(1.0f, 0.2f, 0.2f));
+        model = glm::translate(model, glm::vec3(-3.0f, 0.0f, -3.0f));
+        model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         cat.Draw(shader);
 
