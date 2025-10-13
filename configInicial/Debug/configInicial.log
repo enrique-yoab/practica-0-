@@ -1,0 +1,12 @@
+﻿  Iluminacion.cpp
+C:\Users\yobi_\OneDrive\configLabo\configInicial\configInicial\Iluminacion.cpp(200,30): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\yobi_\OneDrive\configLabo\configInicial\configInicial\Iluminacion.cpp(374,17): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\yobi_\OneDrive\configLabo\configInicial\configInicial\Iluminacion.cpp(375,17): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\yobi_\OneDrive\configLabo\configInicial\configInicial\Iluminacion.cpp(379,21): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\yobi_\OneDrive\configLabo\configInicial\configInicial\Iluminacion.cpp(380,21): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\yobi_\OneDrive\configLabo\configInicial\configInicial\Iluminacion.cpp(382,13): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\yobi_\OneDrive\configLabo\configInicial\configInicial\Iluminacion.cpp(383,13): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+soil2-debug.lib(image_DXT.obj) : warning LNK4099: no se encontró PDB 'soil2-debug.pdb' con 'soil2-debug.lib(image_DXT.obj)' o en 'C:\Users\yobi_\OneDrive\configLabo\configInicial\Debug\soil2-debug.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+soil2-debug.lib(image_helper.obj) : warning LNK4099: no se encontró PDB 'soil2-debug.pdb' con 'soil2-debug.lib(image_helper.obj)' o en 'C:\Users\yobi_\OneDrive\configLabo\configInicial\Debug\soil2-debug.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+soil2-debug.lib(SOIL2.obj) : warning LNK4099: no se encontró PDB 'soil2-debug.pdb' con 'soil2-debug.lib(SOIL2.obj)' o en 'C:\Users\yobi_\OneDrive\configLabo\configInicial\Debug\soil2-debug.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  configInicial.vcxproj -> C:\Users\yobi_\OneDrive\configLabo\configInicial\Debug\configInicial.exe
