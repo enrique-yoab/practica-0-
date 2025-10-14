@@ -46,3 +46,4 @@ void main()
     vec3 result = ambient + diffuse + specular;
     color = vec4(result, 1.0f);
 }
+

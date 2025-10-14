@@ -219,13 +219,21 @@ int main()
 
 
         // Set lights properties
-
+        //Se agregan las componentes de la luz
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "light.ambient"), 0.9f, 0.3f, 0.3f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "light.diffuse"), 0.9f, 0.3f, 0.3f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "light.specular"), 0.2f, 0.9f, 0.9f);
 
         glm::mat4 view = camera.GetViewMatrix();
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 
         // Set material properties
+        // Se agregan las componentes del material
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.ambient"), 0.9f, 0.3f, 0.3f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 0.9f, 0.3f, 0.5f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 0.9f, 0.9f, 0.0f);
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 0.0f);
 
 
 
