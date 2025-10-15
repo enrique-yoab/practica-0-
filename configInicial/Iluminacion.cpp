@@ -232,8 +232,8 @@ int main()
         // Se agregan las componentes del material
         glUniform3f(glGetUniformLocation(lightingShader.Program, "material.ambient"), 0.9f, 0.3f, 0.3f);
         glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 0.9f, 0.3f, 0.5f);
-        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 0.9f, 0.9f, 0.0f);
-        glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 0.0f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 0.9f, 0.9f, 0.9f);
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 5.0f);
 
 
 
@@ -243,9 +243,9 @@ int main()
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         glBindVertexArray(VAO);
        
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        //glDrawArrays(GL_TRIANGLES, 0, 36);
         
-        //red_dog.Draw(lightingShader);
+        red_dog.Draw(lightingShader);
         glBindVertexArray(0);
 
         // Draw light
