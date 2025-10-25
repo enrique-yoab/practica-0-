@@ -105,10 +105,15 @@ bool AnimBall = false;
 bool AnimDog = false;
 float rotDog = 0.0f;
 int dogAnim = 0;
-float FLegs = 0.0f;
-float RLegs = 0.0f;
+float front_izq = 0.0f;
+float front_der = 0.0f;
+float trasera_izq = 0.0f;
+float trasera_der = 0.0f;
 float head = 0.0f;
 float tail = 0.0f;
+float ang_legs = 0.25f;
+float izq = true;
+float der = false;
 glm::vec3 dogPos (0.0f,0.0f,0.0f);
 float dogRot = 0.0f;
 bool step = false;
@@ -247,7 +252,7 @@ int main()
 
 
 		// Point light 1
-	    glm::vec3 lightColor;
+	    glm::vec3 lightColor = glm::vec3(0);
 		lightColor.x= abs(sin(glfwGetTime() *Light1.x));
 		lightColor.y= abs(sin(glfwGetTime() *Light1.y));
 		lightColor.z= sin(glfwGetTime() *Light1.z);
@@ -305,45 +310,52 @@ int main()
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "transparency"), 0);
+
 		//Body
 		modelTemp= model = glm::translate(model, dogPos);
 		modelTemp= model = glm::rotate(model, glm::radians(dogRot), glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		DogBody.Draw(lightingShader);
+
 		//Head
 		model = modelTemp;
 		model = glm::translate(model, glm::vec3(0.0f, 0.093f, 0.208f));
 		model = glm::rotate(model, glm::radians(head), glm::vec3(0.0f, 0.0f, 1.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		HeadDog.Draw(lightingShader);
+
 		//Tail 
 		model = modelTemp;
 		model = glm::translate(model, glm::vec3(0.0f, 0.026f, -0.288f));
 		model = glm::rotate(model, glm::radians(tail), glm::vec3(0.0f, 0.0f, -1.0f)); 
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model)); 
 		DogTail.Draw(lightingShader);
+
 		//Front Left Leg
 		model = modelTemp;
 		model = glm::translate(model, glm::vec3(0.112f, -0.044f, 0.074f));
-		model = glm::rotate(model, glm::radians(FLegs), glm::vec3(-1.0f, 0.0f, 0.0f)); 
+		model = glm::rotate(model, glm::radians(front_izq), glm::vec3(-1.0f, 0.0f, 0.0f)); 
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		F_LeftLeg.Draw(lightingShader);
+
 		//Front Right Leg
 		model = modelTemp; 
 		model = glm::translate(model, glm::vec3(-0.111f, -0.055f, 0.074f));
-		model = glm::rotate(model, glm::radians(FLegs), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(front_der), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		F_RightLeg.Draw(lightingShader);
+
 		//Back Left Leg
 		model = modelTemp; 
 		model = glm::translate(model, glm::vec3(0.082f, -0.046, -0.218)); 
-		model = glm::rotate(model, glm::radians(RLegs), glm::vec3(1.0f, 0.0f, 0.0f)); 
+		model = glm::rotate(model, glm::radians(trasera_izq), glm::vec3(1.0f, 0.0f, 0.0f)); 
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model)); 
 		B_LeftLeg.Draw(lightingShader);
+
 		//Back Right Leg
 		model = modelTemp; 
 		model = glm::translate(model, glm::vec3(-0.083f, -0.057f, -0.231f));
-		model = glm::rotate(model, glm::radians(RLegs), glm::vec3(-1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(trasera_der), glm::vec3(-1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		B_RightLeg.Draw(lightingShader); 
 
@@ -499,6 +511,10 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 		AnimBall = !AnimBall;
 		
 	}
+	if (keys[GLFW_KEY_M])
+	{
+		AnimDog = !AnimDog;
+	}
 	
 }
 void Animation() {
@@ -507,11 +523,48 @@ void Animation() {
 		rotBall += 0.4f;
 		//printf("%f", rotBall);
 	}
-	
 	if (AnimDog)
 	{
-		rotDog -= 0.6f;
+		dogPos += glm::vec3(0.0f,0.0f,0.0005f);
 		//printf("%f", rotBall);
+		if (izq) 
+		{
+			head -= 0.5f;
+			tail -= 1.5f;
+			front_izq -= ang_legs;
+			trasera_der -= ang_legs;
+			front_der -= ang_legs;
+			trasera_izq -= ang_legs;
+			if (head == -20.0f)
+			{
+				izq = !izq;
+				der = !der;
+			}
+		}
+		if (der) 
+		{
+			head += 0.5f;
+			tail += 1.5f;
+			front_izq += ang_legs;
+			trasera_der += ang_legs;
+			front_der += ang_legs;
+			trasera_izq += ang_legs;
+			if (head == 20.0f)
+			{
+				der = !der;
+				izq = !izq;
+			}
+		}
+	}
+	else
+	{
+		head = 0.0f;
+		tail = 0.0f;
+		front_izq = 0.0f;
+		front_der = 0.0f;
+		trasera_izq = 0.0f;
+		trasera_der = 0.0f;
+		dogPos = glm::vec3(0);
 	}
 	
 	
