@@ -120,13 +120,20 @@ typedef struct _frame {
 	
 	float rotDog;
 	float rotDogInc;
+	float head;
+	float headInc;
+	float tail;
+	float tailInc;
+	float RLegs;
+	float RLegsInc;
+	float FLegs;
+	float FLegsInc;
 	float dogPosX;
 	float dogPosY;
 	float dogPosZ;
 	float incX;
 	float incY;
 	float incZ;
-
 
 }FRAME;
 
@@ -143,9 +150,11 @@ void saveFrame(void)
 	KeyFrame[FrameIndex].dogPosX = dogPosX;
 	KeyFrame[FrameIndex].dogPosY = dogPosY;
 	KeyFrame[FrameIndex].dogPosZ = dogPosZ;
-
 	KeyFrame[FrameIndex].rotDog = rotDog;
-
+	KeyFrame[FrameIndex].head = head;
+	KeyFrame[FrameIndex].tail = tail;
+	KeyFrame[FrameIndex].FLegs = FLegs;
+	KeyFrame[FrameIndex].RLegs = RLegs;
 
 	FrameIndex++;
 }
@@ -155,8 +164,11 @@ void resetElements(void)
 	dogPosX = KeyFrame[0].dogPosX;
 	dogPosY = KeyFrame[0].dogPosY;
 	dogPosZ = KeyFrame[0].dogPosZ;
-
 	rotDog = KeyFrame[0].rotDog;
+	head = KeyFrame[0].head;
+	tail = KeyFrame[0].tail;
+	FLegs = KeyFrame[0].FLegs;
+	RLegs = KeyFrame[0].RLegs;
 
 }
 void interpolation(void)
@@ -167,6 +179,10 @@ void interpolation(void)
 	KeyFrame[playIndex].incZ = (KeyFrame[playIndex + 1].dogPosZ - KeyFrame[playIndex].dogPosZ) / i_max_steps;
 
 	KeyFrame[playIndex].rotDogInc = (KeyFrame[playIndex + 1].rotDog - KeyFrame[playIndex].rotDog) / i_max_steps;
+	KeyFrame[playIndex].headInc = (KeyFrame[playIndex + 1].head - KeyFrame[playIndex].head) / i_max_steps;
+	KeyFrame[playIndex].tailInc = (KeyFrame[playIndex + 1].tail - KeyFrame[playIndex].tail) / i_max_steps;
+	KeyFrame[playIndex].FLegsInc = (KeyFrame[playIndex + 1].FLegs - KeyFrame[playIndex].FLegs) / i_max_steps;
+	KeyFrame[playIndex].RLegsInc = (KeyFrame[playIndex + 1].RLegs - KeyFrame[playIndex].RLegs) / i_max_steps;
 
 }
 
@@ -250,6 +266,11 @@ int main()
 		KeyFrame[i].incZ = 0;
 		KeyFrame[i].rotDog = 0;
 		KeyFrame[i].rotDogInc = 0;
+		KeyFrame[i].head = 0;
+		KeyFrame[i].headInc = 0;
+		KeyFrame[i].tailInc = 0;
+		KeyFrame[i].FLegsInc = 0;
+		KeyFrame[i].RLegsInc = 0;
 	}
 
 
@@ -493,6 +514,24 @@ void DoMovement()
 			rotDog -= 1.0f;
 
 	}
+	if (keys[GLFW_KEY_4])
+	{
+		
+			head += 1.0f;
+			tail += 1.0f;
+			FLegs += 1.0f;
+			RLegs += 1.0f;
+
+	}
+
+	if (keys[GLFW_KEY_5])
+	{
+		
+			head -= 1.0f;
+			tail -= 1.0f;
+			FLegs -= 1.0f;
+			RLegs -= 1.0f;
+	}
 			
 	if (keys[GLFW_KEY_H])
 	{
@@ -667,6 +706,10 @@ void Animation() {
 			dogPosZ += KeyFrame[playIndex].incZ;
 
 			rotDog += KeyFrame[playIndex].rotDogInc;
+			head += KeyFrame[playIndex].headInc;
+			tail += KeyFrame[playIndex].tailInc;
+			FLegs += KeyFrame[playIndex].FLegsInc;
+			RLegs += KeyFrame[playIndex].RLegsInc;
 
 			i_curr_steps++;
 		}
