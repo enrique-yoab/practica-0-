@@ -99,11 +99,11 @@ float vertices[] = {
 
 
 glm::vec3 Light1 = glm::vec3(0);
+glm::vec3 dogPos (0.0f,0.0f,0.0f);
 //Anim
 float rotBall = 0.0f;
 bool AnimBall = false;
 bool AnimDog = false;
-float rotDog = 0.0f;
 int dogAnim = 0;
 float front_izq = 0.0f;
 float front_der = 0.0f;
@@ -111,10 +111,9 @@ float trasera_izq = 0.0f;
 float trasera_der = 0.0f;
 float head = 0.0f;
 float tail = 0.0f;
-float ang_legs = 0.25f;
+float ang_legs = 0.20f;
 float izq = true;
 float der = false;
-glm::vec3 dogPos (0.0f,0.0f,0.0f);
 float dogRot = 0.0f;
 bool step = false;
 
@@ -299,8 +298,6 @@ int main()
 
 		glm::mat4 model(1);
 
-	
-		
 		//Carga de modelo 
         view = camera.GetViewMatrix();	
 		model = glm::mat4(1);
@@ -360,8 +357,7 @@ int main()
 		B_RightLeg.Draw(lightingShader); 
 
 
-		model = glm::mat4(1);
-		glEnable(GL_BLEND);//Avtiva la funcionalidad para trabajar el canal alfa
+		model = glm::mat4(1);		glEnable(GL_BLEND);//Avtiva la funcionalidad para trabajar el canal alfa
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "transparency"), 1);
@@ -529,13 +525,13 @@ void Animation() {
 		//printf("%f", rotBall);
 		if (izq) 
 		{
-			head -= 0.5f;
-			tail -= 1.5f;
+			head -= 0.25f;
+			tail -= 0.5f;
 			front_izq -= ang_legs;
 			trasera_der -= ang_legs;
 			front_der -= ang_legs;
 			trasera_izq -= ang_legs;
-			if (head == -20.0f)
+			if (head <= -15.0f)
 			{
 				izq = !izq;
 				der = !der;
@@ -543,13 +539,13 @@ void Animation() {
 		}
 		if (der) 
 		{
-			head += 0.5f;
-			tail += 1.5f;
+			head += 0.25f;
+			tail += 0.5f;
 			front_izq += ang_legs;
 			trasera_der += ang_legs;
 			front_der += ang_legs;
 			trasera_izq += ang_legs;
-			if (head == 20.0f)
+			if (head >= 15.0f)
 			{
 				der = !der;
 				izq = !izq;
